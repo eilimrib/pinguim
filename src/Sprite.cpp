@@ -2,17 +2,18 @@
 #define INCLUDE_SDL_IMAGE
 
 #include "Game.h"
+#include "Sprite.h"
 #include <SDL_include.h>
 #include <string>
 #include <iostream>
 
 
-Sprite::Sprite(){
+Sprite::Sprite(GameObject& associated): Component(associated){
     texture = nullptr;
 }
 
 
-Sprite::Sprite(std::string file){
+Sprite::Sprite(GameObject& associated, std::string file): Component(associated){
     texture = nullptr;
     Open(file.c_str());
 }
@@ -57,8 +58,8 @@ void Sprite::SetClip(int x, int y, int h, int w){
 void Sprite::Render(int x, int y){
     SDL_Rect dst;
 
-    dst.x = x;
-    dst.y = y;
+    dst.x = associated->box.x;
+    dst.y = associated->box.y;
     dst.h = clipRect.h;
     dst.w = clipRect.w;
 
@@ -81,4 +82,11 @@ bool Sprite::IsOpen(){
         return true;
     }
     return false;
+}
+
+Sprite::Update(float dt){   
+}
+
+bool Sprite::Is(std::string type){
+    type == "Sprite" ? return true : return false;
 }
