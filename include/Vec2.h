@@ -9,4 +9,6 @@ class Vec2{
     public:
     Vec2();
     Vec2(float x, float y);
+    inline float getX() { return x; };
+    inline float getY() { return y; };
 };
