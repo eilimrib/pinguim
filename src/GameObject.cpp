@@ -1,11 +1,10 @@
-#define INCLUDE_SDL
-
-#include "SDL_include.h"
+#include "Component.h"
 #include "GameObject.h"
+
+#include <algorithm>
 
 GameObject::GameObject(){
     isDead = false;
-    components = nullptr;
 }
 
 GameObject::~GameObject(){
@@ -32,11 +31,11 @@ void GameObject::RequestDelete(){
     isDead = true;
 }
 
-bool GameObject::AddComponent(Component* cpt){
+void GameObject::AddComponent(Component* cpt){
     components.emplace_back(cpt);
 }
 
-bool GameObject::RemoveComponent(Component* cpt){
+void GameObject::RemoveComponent(Component* cpt){
     std::remove_if(components.begin(), components.end(), cpt);
 }
 

@@ -3,26 +3,26 @@
 #include "Rect.h"
 
 Rect::Rect(){
-    x = 0;
-    y = 0;
-    w = 0;
-    h = 0;
+    this->x = 0;
+    this->y = 0;
+    this->w = 0;
+    this->h = 0;
 }
 
 
 Rect::Rect(float x, float y, float w, float h){
-    x = x;
-    y = y;
-    w = w;
-    h = h;
+    this->x = x;
+    this->y = y;
+    this->w = w;
+    this->h = h;
 }
 
 
 Rect& Rect::operator=(Rect& r){
-    x = r.x;
-    y = r.w;
-    w = r.w;
-    h = r.h;
+    this->x = r.x;
+    this->y = r.w;
+    this->w = r.w;
+    this->h = r.h;
 }
 
 

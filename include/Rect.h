@@ -1,6 +1,5 @@
-#define INCLUDE_SDL
-
-#include "SDL_include.h"
+#ifndef RECT_HEADERS
+#define RECT_HEADERS
 #include "Vec2.h"
 #include <string>
 
@@ -17,3 +16,5 @@ public:
     friend Rect& operator -(Rect& r1, Rect& r2);
     friend Rect& operator -(Rect& r, Vec2& v);
 };
+
+#endif

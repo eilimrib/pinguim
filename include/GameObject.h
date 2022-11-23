@@ -1,18 +1,21 @@
-#define INCLUDE_SDL
+#ifndef GAMEOBJECT_HEADERS
+#define GAMEOBJECT_HEADERS
 
-#include "SDL_include.h"
 #include "Component.h"
 #include "Rect.h"
 #include <string>
+#include <vector>
 
-class GameObject{
+class Component;
+
+class GameObject {
 public:
     GameObject();
     ~GameObject();
 
     void Update(float dt);
     void Render();
-    bool isDead();
+    bool IsDead();
     void RequestDelete();
     void AddComponent(Component* cpt);
     void RemoveComponent(Component* cpt);
@@ -21,4 +24,6 @@ public:
 private:
     std::vector <Component *> components;
     bool isDead;
-}
+};
+
+#endif

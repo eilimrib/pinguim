@@ -4,7 +4,6 @@
 #include "SDL_include.h"
 #include <string>
 
-
 class Music{
 public:
     Music();
