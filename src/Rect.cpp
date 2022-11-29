@@ -18,15 +18,15 @@ Rect::Rect(float x, float y, float w, float h){
 }
 
 
-Rect& Rect::operator=(Rect& r){
+Rect& Rect::operator=(const Rect& r){
     this->x = r.x;
-    this->y = r.w;
+    this->y = r.y;
     this->w = r.w;
     this->h = r.h;
 }
 
 
-Rect& operator +(Rect& r1, Rect& r2){
+Rect& operator +(const Rect& r1, const Rect& r2){
     Rect res;
 
     res.x = r1.x + r2.x;
@@ -37,17 +37,17 @@ Rect& operator +(Rect& r1, Rect& r2){
     return res;
 }
 
-Rect& operator +(Rect& r, Vec2& v){
+Rect& operator +(const Rect& r, const Vec2& v){
     Rect res;
 
-    res.x = r.x + v.getX();
-    res.y = r.x + v.getY();
+    res.x = r.x + v.x;
+    res.y = r.x + v.y;
 
     return res;
 }
 
 
-Rect& operator -(Rect& r1, Rect& r2){
+Rect& operator -(const Rect& r1, const Rect& r2){
     Rect res;
 
     res.x = r1.x - r2.x;
@@ -58,11 +58,11 @@ Rect& operator -(Rect& r1, Rect& r2){
     return res;
 }
 
-Rect& operator -(Rect& r, Vec2& v){
+Rect& operator -(const Rect& r, const Vec2& v){
     Rect res;
 
-    res.x = r.x - v.getX();
-    res.y = r.x - v.getY();
+    res.x = r.x - v.x;
+    res.y = r.x - v.y;
 
     return res;
 }

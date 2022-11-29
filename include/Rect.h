@@ -4,17 +4,17 @@
 #include <string>
 
 class Rect{
-private:
-    float x, y, w, h;
 public:
+    float x, y, w, h;
     Rect();
     Rect(float x, float y, float w, float h);
-
-    Rect& operator =(Rect& r);
-    friend Rect& operator +(Rect& r1, Rect& r2);
-    friend Rect& operator +(Rect& r, Vec2& v);
-    friend Rect& operator -(Rect& r1, Rect& r2);
-    friend Rect& operator -(Rect& r, Vec2& v);
+    
+    bool Contains(float x, float y);
+    Rect& operator =(const Rect& r);
+    friend Rect& operator +(const Rect& r1, const Rect& r2);
+    friend Rect& operator +(const Rect& r, const Vec2& v);
+    friend Rect& operator -(const Rect& r1, const Rect& r2);
+    friend Rect& operator -(const Rect& r, const Vec2& v);
 };
 
 #endif

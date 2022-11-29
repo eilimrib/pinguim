@@ -1,6 +1,9 @@
 #define INCLUDE_SDL
 #define INCLUDE_SDL_IMAGE
 
+#ifndef SPRITE_HEADERS
+#define SPRITE_HEADERS
+
 #include "SDL_include.h"
 #include "Component.h"
 #include "GameObject.h"
@@ -19,10 +22,12 @@ public:
     int GetWidth();
     int GetHeight();
     bool IsOpen();
-
+    void Update(float dt);
+    bool Is(std::string type);
 private:
     SDL_Texture *texture;
     int width;
     int height;
     SDL_Rect clipRect;
 };
+#endif

@@ -58,8 +58,8 @@ void Sprite::SetClip(int x, int y, int h, int w){
 void Sprite::Render(int x, int y){
     SDL_Rect dst;
 
-    dst.x = associated->box.x;
-    dst.y = associated->box.y;
+    dst.x = associated.box.x;
+    dst.y = associated.box.y;
     dst.h = clipRect.h;
     dst.w = clipRect.w;
 
@@ -84,9 +84,16 @@ bool Sprite::IsOpen(){
     return false;
 }
 
-Sprite::Update(float dt){   
+
+void Sprite::Update(float dt){   
 }
 
+
+void Sprite::Render(){
+
+}
+
+
 bool Sprite::Is(std::string type){
-    type == "Sprite" ? return true : return false;
+    return (type == "Sprite");
 }

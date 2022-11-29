@@ -1,5 +1,7 @@
 #define INCLUDE_SDL
 #define INCLUDE_SDL_MIXER
+#ifndef SOUND_HEADERS
+#define SOUND_HEADERS
 
 #include "SDL_include.h"
 #include "Component.h"
@@ -18,8 +20,9 @@ public:
     bool IsOpen();
     void Update(float dt);
     void Render();
-    void Is(std::string type);
+    bool Is(std::string type);
 private:
     Mix_Chunk * chunk;
     int channel;
 };
+#endif

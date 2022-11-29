@@ -1,4 +1,6 @@
 #define INCLUDE_SDL
+#ifndef GAME_HEADERS
+#define GAME_HEADERS
 
 #include "State.h"
 #include <string>
@@ -28,3 +30,4 @@ private:
     Game();
     Game(std::string title, int width, int height);
 };
+#endif

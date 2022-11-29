@@ -7,7 +7,7 @@
 
 
 Sound::Sound(GameObject& associated): Component(associated){
-    Sound = nullptr;
+    chunk = nullptr;
 }
 
 
@@ -38,7 +38,7 @@ void Sound::Stop(){
 
 void Sound::Open(std::string file){
     chunk = Mix_LoadWAV(file.c_str());
-    if(Sound == nullptr){
+    if(chunk == nullptr){
         SDL_LogError(0, "Can't open Sound file: %s", SDL_GetError());
         return;
     }
@@ -46,7 +46,7 @@ void Sound::Open(std::string file){
 
 
 bool Sound::IsOpen(){
-    if(Sound == nullptr){
+    if(chunk == nullptr){
         return false;
     }
     return true;
