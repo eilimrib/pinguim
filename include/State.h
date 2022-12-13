@@ -17,9 +17,8 @@ public:
     void Render();
 private:
     void Input();
-    void AddObject(int mouseX, int mouseY);
-    std::vector<std::unique_ptr<GameObject>> objectArray;
-    Sprite bg;
+    void AddObject(GameObject* obj);
+    std::vector<std::shared_ptr<GameObject>> objectArray;
     Music music;
     bool quitRequested;
 };

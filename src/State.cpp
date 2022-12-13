@@ -10,25 +10,12 @@
 
 
 
-State::State(): music(){
+State::State(){
     quitRequested = false;
 }
 
 State::~State(){
     objectArray.clear();
-}
-
-
-void State::LoadAssets(){
-    std::string str1, str2;
-    str1 = "./assets/img/ocean.jpg";
-    str2 = "./assets/audio/stageState.ogg";
-
-    bg.Open(str1);
-    music.Open(str2);
-
-    bg.SetClip(0, 0, 600, 1024);
-    music.Play(-1);
 }
 
 
@@ -39,13 +26,13 @@ void State::Update(float dt){
 }
 
 
-void State::Render(){
-    bg.Render(0,0);
-}
-
-
 bool State::QuitRequested(){
     return quitRequested;
+}
+
+void State::AddObject(GameObject* go){
+	std::shared_ptr<GameObject> shared(go);
+	objectArray.emplace_back(shared);
 }
 
 
@@ -70,15 +57,15 @@ void State::Input() {
 			// Percorrer de trás pra frente pra sempre clicar no objeto mais de cima
 			for(int i = objectArray.size() - 1; i >= 0; --i) {
 				// Obtem o ponteiro e casta pra Face.
-				GameObject* go = (GameObject*) objectArray[i].get();
+				std::shared_ptr<GameObject> shared(objectArray[i].get());
 				// Nota: Desencapsular o ponteiro é algo que devemos evitar ao máximo.
 				// O propósito do unique_ptr é manter apenas uma cópia daquele ponteiro,
 				// ao usar get(), violamos esse princípio e estamos menos seguros.
 				// Esse código, assim como a classe Face, é provisório. Futuramente, para
 				// chamar funções de GameObjects, use objectArray[i]->função() direto.
 
-				if(go->box.Contains( {(float)mouseX, (float)mouseY} ) ) {
-					Face* face = (Face*)go->GetComponent( "Face" );
+				if(shared->box.Contains((float)mouseX, (float)mouseY) ) {
+					Face* face = (Face*)shared->GetComponent( "Face" );
 					if ( nullptr != face ) {
 						// Aplica dano
 						face->Damage(std::rand() % 10 + 10);
@@ -96,8 +83,12 @@ void State::Input() {
 			// Se não, crie um objeto
 			else {
 				Vec2 objPos = Vec2( 200, 0 ).GetRotated( -M_PI + M_PI*(rand() % 1001)/500.0 ) + Vec2( mouseX, mouseY );
-				AddObject((int)objPos.x, (int)objPos.y);
+				GameObject go = GameObject();
+				go.box.x = objPos.x;
+				go.box.y = objPos.y;
+				AddObject(&go);
 			}
 		}
 	}
+
 }

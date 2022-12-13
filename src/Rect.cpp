@@ -18,51 +18,54 @@ Rect::Rect(float x, float y, float w, float h){
 }
 
 
-Rect& Rect::operator=(const Rect& r){
-    this->x = r.x;
-    this->y = r.y;
-    this->w = r.w;
-    this->h = r.h;
+Rect Rect::operator=(const Rect& r) const{
+    return Rect(r.x, r.y, r.w, r.h);
 }
 
 
-Rect& operator +(const Rect& r1, const Rect& r2){
-    Rect res;
-
-    res.x = r1.x + r2.x;
-    res.y = r1.y + r2.y;
-    res.w = r1.w + r2.w;
-    res.h = r1.h + r2.h;
-
-    return res;
+Rect Rect::operator +(const Rect& r) const{
+    return Rect(this->x + r.x, this->y + r.y, this->w + r.w, this->h + r.h);
 }
 
-Rect& operator +(const Rect& r, const Vec2& v){
-    Rect res;
-
-    res.x = r.x + v.x;
-    res.y = r.x + v.y;
-
-    return res;
+Rect Rect::operator +(const Vec2& v) const{
+    return Rect(this->x + v.x, this->y + v.y, this->w, this->h);
 }
 
 
-Rect& operator -(const Rect& r1, const Rect& r2){
-    Rect res;
-
-    res.x = r1.x - r2.x;
-    res.y = r1.y - r2.y;
-    res.w = r1.w - r2.w;
-    res.h = r1.h - r2.h;
-
-    return res;
+Rect Rect::operator -(const Rect& r) const{
+    float res_x, res_y;
+    
+    res_x = this->x - r.x;
+    res_y = this->y - r.y;
+    if(this->w == r.w && this->h == r.h){
+        if(res_x < 0){
+            res_x = 0;
+        }
+        if(res_y < 0){
+            res_y = 0;
+        }
+    }
+    return Rect(res_x, res_y, this->w, this->h);
 }
 
-Rect& operator -(const Rect& r, const Vec2& v){
-    Rect res;
+Rect Rect::operator -(const Vec2& v) const{
+    float res_x, res_y;
+    
+    res_x = this->x - v.x;
+    res_y = this->y - v.y;
 
-    res.x = r.x - v.x;
-    res.y = r.x - v.y;
+    if(res_x < 0){
+        res_x = 0;
+    }
+    if(res_y < 0){
+        res_y = 0;
+    }
+    return Rect(res_x, res_y, this->w, this->h);
+}
 
-    return res;
+bool Rect::Contains(float coord_x, float coord_y){
+    if (coord_x <= this->x && coord_y <= this->y){
+        return true;
+    }
+    return false;
 }

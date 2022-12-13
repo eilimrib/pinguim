@@ -99,10 +99,8 @@ SDL_Renderer* Game::GetRenderer(){
 
 
 void Game::run(){
-    state->LoadAssets();
     while(!state->QuitRequested()){
         state->Update(0.0);
-        state->Render();
 
         SDL_RenderPresent(renderer);
         SDL_Delay(33);

@@ -10,11 +10,11 @@ public:
     Rect(float x, float y, float w, float h);
     
     bool Contains(float x, float y);
-    Rect& operator =(const Rect& r);
-    friend Rect& operator +(const Rect& r1, const Rect& r2);
-    friend Rect& operator +(const Rect& r, const Vec2& v);
-    friend Rect& operator -(const Rect& r1, const Rect& r2);
-    friend Rect& operator -(const Rect& r, const Vec2& v);
+    Rect operator =(const Rect& r) const;
+    Rect operator +(const Rect& r) const;
+    Rect operator +(const Vec2& v) const;
+    Rect operator -(const Rect& r) const;
+    Rect operator -(const Vec2& v) const;
 };
 
 #endif

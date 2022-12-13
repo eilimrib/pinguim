@@ -9,9 +9,9 @@ public:
     Vec2(float x, float y);
     Vec2 GetRotated(float angle);
 
-    Vec2& operator =(const Vec2& r);
-    friend Vec2& operator +(const Vec2& r1, const Vec2& r2);
-    friend Vec2& operator -(const Vec2& r1, const Vec2& r2);
+    Vec2 operator =(const Vec2& v) const;
+    Vec2 operator +(const Vec2& v) const;
+    Vec2 operator -(const Vec2& v) const;
 };
 
 #endif
