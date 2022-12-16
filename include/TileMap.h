@@ -1,8 +1,9 @@
-#include "Component.h"
-#include "TileSet.h"
 #ifndef TILEMAP_HEADERS
 #define TILEMAP_HEADERS
 
+#include "Component.h"
+#include "TileSet.h"
+#include <vector>
 
 class TileMap: public Component{
 public:
@@ -15,6 +16,8 @@ public:
     int GetWidth();
     int GetHeight();
     int GetDepth();
+    void Update(float dt);
+    bool Is(std::string type);
 private:
     std::vector<int> tileMatrix;
     TileSet* tileset;

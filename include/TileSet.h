@@ -1,8 +1,9 @@
+#ifndef TILESET_HEADERS
+#define TILESET_HEADERS
+
 #include "Sprite.h"
 #include "GameObject.h"
 
-#ifndef TILESET_HEADERS
-#define TILESET_HEADERS
 
 class TileSet{
 public:

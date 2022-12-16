@@ -13,6 +13,10 @@ void TileMap::SetTileSet(TileSet* tileset){
 
 
 void TileMap::Load(std::string file){
+    
+}
+
+void TileMap::Render(){
 
 }
 
@@ -35,4 +39,13 @@ int TileMap::GetHeight(){
 
 int TileMap::GetWidth(){
     return mapWidth;
+}
+
+
+void TileMap::Update(float dt){   
+}   
+
+
+bool TileMap::Is(std::string type){
+    return (type == "TileMap");
 }
