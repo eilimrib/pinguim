@@ -37,7 +37,7 @@ void Sound::Stop(){
 
 
 void Sound::Open(std::string file){
-    chunk = Mix_LoadWAV(file.c_str());
+    chunk = Resources::GetSound(file.c_str());
     if(chunk == nullptr){
         SDL_LogError(0, "Can't open Sound file: %s", SDL_GetError());
         return;

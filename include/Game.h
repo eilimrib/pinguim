@@ -3,6 +3,7 @@
 #define GAME_HEADERS
 
 #include "State.h"
+#include "Resources.h"
 #include <string>
 #include <SDL_include.h>
 
