@@ -28,7 +28,7 @@ void Sprite::Open(std::string file){
     int w = GetWidth();
     int h = GetWidth();
 
-    texture = Resources.GetImage(file);
+    texture = Resources::GetImage(file);
     if(texture == nullptr){
         SDL_LogError(0, "IMG_LoadTexture: %s", SDL_GetError());
         return;

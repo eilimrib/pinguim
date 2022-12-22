@@ -2,6 +2,7 @@
 #define INCLUDE_SDL_MIXER
 
 #include "Sound.h"
+#include "Resources.h"
 #include <SDL_include.h>
 #include <string>
 
