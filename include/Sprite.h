@@ -18,7 +18,7 @@ public:
     void Open(std::string file);
     void SetClip(int x, int y, int w, int h);
     void Render();
-    void Render(int x, int y);
+    void Render(int x, int y, int w, int h);
     int GetWidth();
     int GetHeight();
     bool IsOpen();

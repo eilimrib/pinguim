@@ -52,15 +52,23 @@ void Sprite::SetClip(int x, int y, int h, int w){
 }
 
 
-void Sprite::Render(int x, int y){
+void Sprite::Render(int x, int y, int w, int h)
+{
     SDL_Rect dst;
+    dst.x = x;
+    dst.y = y;
+    dst.w = w;
+    dst.h = h;
 
-    dst.x = associated.box.x;
-    dst.y = associated.box.y;
-    dst.h = clipRect.h;
-    dst.w = clipRect.w;
-
-    SDL_RenderCopy(Game::GetInstance().GetRenderer(), texture, &clipRect, &dst);
+    if (SDL_RenderCopy(
+            Game::GetInstance().GetRenderer(), // renderer
+            texture,                            // texture
+            &clipRect,                          // source rect
+            &dst                                // destination rect
+            ))
+    {
+        SDL_LogError(0, "Unable to render sprite: %s", IMG_GetError());
+    }
 }
 
 

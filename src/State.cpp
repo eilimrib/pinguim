@@ -4,7 +4,10 @@
 #include "SDL_include.h"
 #include "GameObject.h"
 #include "Face.h"
+#include "Sprite.h"
 #include "State.h"
+#include "TileMap.h"
+#include "TileSet.h"
 #include <string>
 #include "math.h"
 
@@ -12,6 +15,24 @@
 
 State::State(){
     quitRequested = false;
+
+	GameObject *goOcean = new GameObject();
+
+	Sprite *bg = new Sprite(*goOcean, "assets/img/ocean.jpg");
+	goOcean->AddComponent(bg);
+	objectArray.emplace_back(goOcean);
+
+ 	GameObject *gameObjectMap = new GameObject();
+
+    TileSet *tileSet = new TileSet(64, 64, "assets/img/tileset.png");
+    TileMap *tileMap = new TileMap(*gameObjectMap, "assets/map/tileMap.txt", tileSet);
+    gameObjectMap->AddComponent(tileMap);
+    gameObjectMap->box.x = 0;
+    gameObjectMap->box.y = 0;
+    objectArray.emplace_back(gameObjectMap);
+
+	music = new Music("asssets/audio/stageStage.ogg");
+	music->Play();
 }
 
 State::~State(){

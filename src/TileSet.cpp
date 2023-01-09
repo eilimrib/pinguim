@@ -1,30 +1,49 @@
-#include "TileSet.h"
+#include "../include/TileSet.h"
 
+TileSet::TileSet(int tileWidth, int tileHeight, std::string file)
+{
+    GameObject *gameObject = new GameObject();
+    tileSet = new Sprite(*gameObject, file);
+    gameObject->AddComponent(tileSet);
 
-TileSet::TileSet(GameObject& associated, int tileWidth, int tileHeight, std::string file): tiles(associated){
- this->tileHeight = tileHeight;
- this-> tileWidth = tileWidth;
- this->tiles.Open(file);
- this->columns = tiles.GetWidth();
- this->rows = tiles.GetHeight();
-}
+    if (tileSet->IsOpen())
+    {
+        // Set width and height
+        this->tileWidth = tileWidth;
+        this->tileHeight = tileHeight;
 
-
-void TileSet::RenderTile(unsigned index, float x, float y){
-    if(index < unsigned(rows * columns)){
-        int curX = (index % columns) * tileWidth;
-        int curY = (index / columns) * tileHeight;
-
-        tiles.SetClip(curX, curY, tileWidth, tileHeight);
-        tiles.Render(x, y);        
+        // Set rows and columns based on tile dimensions and gameObject's box dimensions
+        rows = tileSet->GetHeight() / tileHeight;
+        columns = tileSet->GetWidth() / tileWidth;
     }
 }
 
-int TileSet::GetTileHeight(){
-    return tileHeight;
+TileSet::~TileSet()
+{
 }
 
+void TileSet::RenderTile(unsigned index, float x, float y)
+{
 
-int TileSet::GetTileWidth(){
+    if (index < unsigned(rows * columns))
+    {
+        // Calculate position on player map
+        int currentX = (index % columns) * tileWidth;
+        int currentY = (index / columns) * tileHeight;
+
+        // SetClip
+        tileSet->SetClip(currentX, currentY, tileWidth, tileHeight);
+        // Render with location
+        tileSet->Render(x, y, tileWidth, tileHeight);
+    }
+}
+
+int TileSet::GetTileWidth()
+{
     return tileWidth;
+}
+
+int TileSet::GetTileHeight()
+{
+    return tileHeight;
 }

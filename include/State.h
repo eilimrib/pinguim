@@ -19,7 +19,7 @@ private:
     void Input();
     void AddObject(GameObject* obj);
     std::vector<std::shared_ptr<GameObject>> objectArray;
-    Music music;
+    Music *music;
     bool quitRequested;
 };
 #endif
