@@ -6,6 +6,7 @@
 #include "SDL_include.h"
 #include "Component.h"
 #include <string>
+#include <memory>
 
 
 class Sound: public Component{
@@ -22,7 +23,7 @@ public:
     void Render();
     bool Is(std::string type);
 private:
-    Mix_Chunk * chunk;
+    std::shared_ptr<Mix_Chunk> chunk;
     int channel;
 };
 #endif

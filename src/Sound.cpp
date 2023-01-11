@@ -13,13 +13,11 @@ Sound::Sound(GameObject& associated): Component(associated){
 
 
 Sound::Sound(GameObject& associated, std::string file): Component(associated){
-    Open(file.c_str());
+    Open(file);
 }
 
 
 Sound::~Sound(){
-    Stop();
-    Mix_FreeChunk(chunk);
 }
 
 
@@ -28,20 +26,23 @@ void Sound::Play(int times){
         SDL_LogError(0, "Null Sound: %s", SDL_GetError());
         return;
     }
-    Mix_PlayChannel(channel, chunk, times);
+    channel = Mix_PlayChannel(-1, chunk.get(), times - 1);
+    Mix_VolumeChunk(chunk.get(), 50);
 }
 
 
 void Sound::Stop(){
-    Mix_HaltChannel(channel);
+    if (chunk != nullptr){
+        Mix_HaltChannel(channel);
+    }
 }
 
 
 void Sound::Open(std::string file){
-    chunk = Resources::GetSound(file.c_str());
-    if(chunk == nullptr){
-        SDL_LogError(0, "Can't open Sound file: %s", SDL_GetError());
-        return;
+    chunk = Resources::GetSound(file);
+    if (chunk == nullptr){
+        SDL_Log("Cant load sound: %s", SDL_GetError());
+        exit(EXIT_FAILURE);
     }
 }
 

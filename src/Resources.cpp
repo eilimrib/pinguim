@@ -1,66 +1,79 @@
 #include "Resources.h"
 #include "Game.h"
+#include <string>
+#include <iostream>
 
-std::unordered_map<std::string, SDL_Texture *> Resources::imageTable;
-std::unordered_map<std::string, Mix_Music *> Resources::musicTable;
-std::unordered_map<std::string, Mix_Chunk *> Resources::soundTable;
-
-
-Resources::Resources(){
-}
-
-
-Resources::~Resources(){
-}
+std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> Resources::imageTable;
+std::unordered_map<std::string, std::shared_ptr<Mix_Music>> Resources::musicTable;
+std::unordered_map<std::string, std::shared_ptr<Mix_Chunk>> Resources::soundTable;
+std::unordered_map<std::string, std::shared_ptr<TTF_Font>> Resources::fontTable;
 
 
-SDL_Texture* Resources::GetImage(std::string file){
-    SDL_Texture* texture;
+std::shared_ptr<SDL_Texture> Resources::GetImage(std::string file){
+    if (imageTable.find(file) != imageTable.end()){
+        return imageTable[file];
+    }
 
-    texture = IMG_LoadTexture(Game::GetInstance().GetRenderer(), file.c_str());
-    imageTable[file] = texture;
-
-    return texture;
+    SDL_Texture *texture = IMG_LoadTexture(Game::GetInstance().GetRenderer(), file.c_str());
+    imageTable[file] = std::shared_ptr<SDL_Texture>(texture, [](SDL_Texture *ptr)
+                                                    { SDL_DestroyTexture(ptr); });
+    return imageTable[file];
 }
 
 
 void Resources::ClearImages(){
-    for(auto &i: imageTable){
-        SDL_DestroyTexture(i.second);
+    Resources::imageTable.clear();
+}
+
+
+std::shared_ptr<Mix_Music> Resources::GetMusic(std::string file){
+    if (musicTable.find(file) != musicTable.end()){
+        return musicTable[file];
     }
-    imageTable.clear();
+
+    Mix_Music *music = Mix_LoadMUS(file.c_str());
+    musicTable[file] = std::shared_ptr<Mix_Music>(music, [](Mix_Music *ptr)
+                                                  { Mix_FreeMusic(ptr); });
+    return musicTable[file];
 }
 
-
-Mix_Music* Resources::GetMusic(std::string file){
-    Mix_Music* music;
-
-    music = Mix_LoadMUS(file.c_str());
-    musicTable[file] = music;
-
-    return music;
-}
 
 void Resources::ClearMusic(){
-    for(auto &i: musicTable){
-        Mix_FreeMusic(i.second);
-    }
     musicTable.clear();
 }
 
 
-Mix_Chunk* Resources::GetSound(std::string file){
-    Mix_Chunk* sound;
+std::shared_ptr<Mix_Chunk> Resources::GetSound(std::string file){
+    if (soundTable.find(file) != soundTable.end()){
+        return soundTable[file];
+    }
 
-    sound = Mix_LoadWAV(file.c_str());
-    soundTable[file] = sound;
-
-    return sound;
+    Mix_Chunk *sound = Mix_LoadWAV(file.c_str());
+    soundTable[file] = std::shared_ptr<Mix_Chunk>(sound, [](Mix_Chunk *ptr)
+                                                  { Mix_FreeChunk(ptr); });
+    return soundTable[file];
 }
 
-void Resources::ClearChunks(){
-    for(auto &i: soundTable){
-        Mix_FreeChunk(i.second);
-    }
+
+void Resources::ClearSounds()
+{
     soundTable.clear();
+}
+
+
+std::shared_ptr<TTF_Font> Resources::GetFont(std::string file, int size){
+    std::string key = file + std::to_string(size);
+    if (fontTable.find(key) != fontTable.end()){
+        return fontTable[key];
+    }
+
+    TTF_Font *font = TTF_OpenFont(file.c_str(), size);
+    fontTable[key] = std::shared_ptr<TTF_Font>(font, [](TTF_Font *ptr)
+                                               { TTF_CloseFont(ptr); });
+    return fontTable[key];
+}
+
+
+void Resources::ClearFonts(){
+    fontTable.clear();
 }

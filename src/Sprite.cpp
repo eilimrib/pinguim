@@ -28,19 +28,18 @@ void Sprite::Open(std::string file){
     int w = GetWidth();
     int h = GetWidth();
 
-    texture = Resources::GetImage(file);
-    if(texture == nullptr){
-        SDL_LogError(0, "IMG_LoadTexture: %s", SDL_GetError());
-        return;
+   texture = Resources::GetImage(file);
+
+    if (texture == nullptr)
+    {
+        SDL_Log("Cant load sprite: %s", SDL_GetError());
+        exit(EXIT_FAILURE);
     }
 
-    if(!SDL_QueryTexture(texture, nullptr, nullptr, &w, &h)){
-        SDL_GetError();
-        return;
-    }
-    
-    SetClip(0, 0, GetWidth(), GetHeight());
-    SDL_RenderSetClipRect(Game::GetInstance().GetRenderer(), &clipRect);
+    SDL_QueryTexture(texture.get(), nullptr, nullptr, &w, &h);
+    associated.box.w = w;
+    associated.box.h = h;
+    SetClip(0, 0, w, h);
 }
 
 
@@ -62,7 +61,7 @@ void Sprite::Render(int x, int y, int w, int h)
 
     if (SDL_RenderCopy(
             Game::GetInstance().GetRenderer(), // renderer
-            texture,                            // texture
+            texture.get(),                            // texture
             &clipRect,                          // source rect
             &dst                                // destination rect
             ))

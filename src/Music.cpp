@@ -13,7 +13,7 @@ Music::Music(){
 
 
 Music::Music(std::string file){
-    Open(file.c_str());
+    Open(file);
 }
 
 
@@ -23,11 +23,10 @@ Music::~Music(){
 
 
 void Music::Play(int times){
-    if(music == nullptr){
-        SDL_LogError(0, "Null music: %s", SDL_GetError());
-        return;
+    if(Mix_PlayMusic(music.get(), times) == -1) {
+        SDL_Log("Can't play music: %s", SDL_GetError());
     }
-    Mix_PlayMusic(music, times);
+    Mix_VolumeMusic(50);
 }
 
 
@@ -37,7 +36,7 @@ void Music::Stop(int msToStop){
 
 
 void Music::Open(std::string file){
-    music = Resources::GetMusic(file.c_str());
+    music = Resources::GetMusic(file);
     if(music == nullptr){
         SDL_LogError(0, "Can't open music file: %s", SDL_GetError());
         return;
