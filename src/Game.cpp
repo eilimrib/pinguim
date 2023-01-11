@@ -19,6 +19,10 @@ Game& Game::GetInstance() {
 }
 
 Game::Game(){
+    if(instance != nullptr){
+        return;
+    }
+    instance = this;
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER)){
         SDL_GetError();
     }
