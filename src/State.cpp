@@ -31,7 +31,7 @@ State::State(){
     gameObjectMap->box.y = 0;
     objectArray.emplace_back(gameObjectMap);
 
-	music = new Music("asssets/audio/stageState.ogg");
+	music = new Music("assets/audio/stageState.ogg");
 	music->Play();
 }
 
