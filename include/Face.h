@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "Sound.h"
 #include "Component.h"
-#include <string>
+
 
 class Face : public Component {
 public:

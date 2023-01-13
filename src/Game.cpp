@@ -36,15 +36,17 @@ Game::Game(){
     }
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
     Mix_AllocateChannels(32);
-    window = SDL_CreateWindow(engine::DEFAULT_GAME_NAME.c_str(), 
+    this->window = SDL_CreateWindow(engine::DEFAULT_GAME_NAME.c_str(), 
                               SDL_WINDOWPOS_CENTERED, 
                               SDL_WINDOWPOS_CENTERED, 
                               engine::DEFAULT_WIDTH, 
                               engine::DEFAULT_HEIGHT, 
                               0);
 
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    state = new State();
+    this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    this->state = new State();
+    this->dt = 0.0;
+    this->frameStart = 0;
 }
 
 
@@ -109,4 +111,15 @@ void Game::run(){
         SDL_RenderPresent(renderer);
         SDL_Delay(33);
     }
+}
+
+
+void Game::CalculateDeltaTime(){
+    this->dt = this->frameStart - SDL_GetTicks();
+    this->frameStart++;
+}
+
+
+float Game::GetDeltaTime(){
+    return this->dt;
 }
