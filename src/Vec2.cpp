@@ -11,7 +11,7 @@ Vec2::Vec2(float x, float y){
     this->y = y;
 }
 
-Vec2 Vec2::operator=(const Vec2& v) const{
+Vec2 Vec2::operator =(const Vec2& v) const{
     return Vec2(v.x, v.y);
 }
 
@@ -23,6 +23,17 @@ Vec2 Vec2::operator +(const Vec2& v) const{
 Vec2 Vec2::operator -(const Vec2& v) const{
     return Vec2(this->x - v.x, this->y - v.y);
 }
+
+
+Vec2 Vec2::operator +=(const Vec2& v) const{
+    return *this + v;
+}
+
+
+Vec2 Vec2::operator *(const float& f) const{
+    return Vec2(this->x * f, this->y * f);
+}
+
 
 Vec2 Vec2::GetRotated(float angle){    
     return Vec2(this->x * cosf(angle) - this->y * sinf(angle), this->y * cosf(angle) + this->x * sinf(angle));

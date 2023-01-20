@@ -12,6 +12,8 @@ public:
     Vec2 operator =(const Vec2& v) const;
     Vec2 operator +(const Vec2& v) const;
     Vec2 operator -(const Vec2& v) const;
+    Vec2 operator +=(const Vec2& v) const;
+    Vec2 operator *(const float& f) const;
 };
 
 #endif

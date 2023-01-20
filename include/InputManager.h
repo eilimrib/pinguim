@@ -34,7 +34,7 @@ public:
 
     bool QuitRequested();
 
-    InputManager& GetInstance();
+    static InputManager& GetInstance();
 private:
     bool mouseState[6];
     int mouseUpdate[6];

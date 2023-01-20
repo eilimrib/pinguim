@@ -23,6 +23,8 @@ public:
     static Game& GetInstance();
     float GetDeltaTime();
     void run();
+    int width;
+    int height;
 private:
     int frameStart;
     float dt;

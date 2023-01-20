@@ -14,7 +14,7 @@ Game& Game::GetInstance() {
     if(instance != nullptr){
         return *instance;
     }
-    instance = new Game();
+    new Game();
     return *instance;
 }
 
@@ -36,11 +36,13 @@ Game::Game(){
     }
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
     Mix_AllocateChannels(32);
+    this->width = engine::DEFAULT_WIDTH;
+    this->height = engine::DEFAULT_HEIGHT;
     this->window = SDL_CreateWindow(engine::DEFAULT_GAME_NAME.c_str(), 
                               SDL_WINDOWPOS_CENTERED, 
                               SDL_WINDOWPOS_CENTERED, 
-                              engine::DEFAULT_WIDTH, 
-                              engine::DEFAULT_HEIGHT, 
+                              this->width, 
+                              this->height, 
                               0);
 
     this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -67,7 +69,8 @@ Game::Game(std::string title, int width, int height){
     if(Mix_Init(MIX_INIT_OGG | MIX_INIT_MP3)){
         SDL_GetError();
     }
-
+    this->width = width;
+    this->height = height;
     window = SDL_CreateWindow(title.c_str(), 
                               SDL_WINDOWPOS_CENTERED, 
                               SDL_WINDOWPOS_CENTERED, 

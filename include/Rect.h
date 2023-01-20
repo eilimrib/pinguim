@@ -9,10 +9,13 @@ public:
     Rect();
     Rect(float x, float y, float w, float h);
     
+    Vec2 Center();
+    void SetOrigin(Vec2& origin);
     bool Contains(float x, float y);
     Rect operator =(const Rect& r) const;
     Rect operator +(const Rect& r) const;
     Rect operator +(const Vec2& v) const;
+    Rect operator *(const Vec2& v) const;
     Rect operator -(const Rect& r) const;
     Rect operator -(const Vec2& v) const;
 };

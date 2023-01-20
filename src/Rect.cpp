@@ -27,6 +27,7 @@ Rect Rect::operator +(const Rect& r) const{
     return Rect(this->x + r.x, this->y + r.y, this->w + r.w, this->h + r.h);
 }
 
+
 Rect Rect::operator +(const Vec2& v) const{
     return Rect(this->x + v.x, this->y + v.y, this->w, this->h);
 }
@@ -68,4 +69,16 @@ bool Rect::Contains(float coord_x, float coord_y){
         return true;
     }
     return false;
+}
+
+
+Vec2 Rect::Center()
+{
+    return Vec2((this->x + this->w / 2), (this->y + this->h / 2));
+}
+
+
+void Rect::SetOrigin(Vec2& origin){
+    this->x = origin.x;
+    this->y = origin.y;
 }
