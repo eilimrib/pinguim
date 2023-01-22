@@ -15,7 +15,15 @@
 
 State::State(){
     quitRequested = false;
+	started = false;
+}
 
+State::~State(){
+    objectArray.clear();
+}
+
+
+void State::LoadAssets(){
 	GameObject *goOcean = new GameObject();
 
 	Sprite *bg = new Sprite(*goOcean, "assets/img/ocean.jpg");
@@ -35,10 +43,6 @@ State::State(){
 	music->Play();
 }
 
-State::~State(){
-    objectArray.clear();
-}
-
 
 void State::Update(float dt){
     if(SDL_QuitRequested()){
@@ -51,9 +55,23 @@ bool State::QuitRequested(){
     return quitRequested;
 }
 
-void State::AddObject(GameObject* go){
+std::weak_ptr<GameObject> State::AddObject(GameObject* go){
 	std::shared_ptr<GameObject> shared(go);
 	objectArray.emplace_back(shared);
+	return shared;
+}
+
+
+std::weak_ptr<GameObject> State::GetObjectPtr(GameObject* go){
+	std::shared_ptr<GameObject> shared;
+	for(int i = 0; i < (int) objectArray.size(); i++){
+		if(go == objectArray[i].get()){
+			shared = objectArray[i];
+			return shared;
+		}
+	}
+	shared = nullptr;
+	return shared;
 }
 
 
@@ -112,4 +130,13 @@ void State::Input() {
 		}
 	}
 
+}
+
+
+void State::Start(){
+	LoadAssets();
+	for(int i = 0; i < (int) objectArray.size(); i++){
+		objectArray[i]->Start();
+	}
+	started = true;
 }

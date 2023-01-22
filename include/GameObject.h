@@ -16,6 +16,7 @@ public:
     void Update(float dt);
     void Render();
     bool IsDead();
+    void Start();
     void RequestDelete();
     void AddComponent(Component* cpt);
     void RemoveComponent(Component* cpt);
@@ -24,6 +25,7 @@ public:
 private:
     std::vector <Component *> components;
     bool isDead;
+    bool started;
 };
 
 #endif

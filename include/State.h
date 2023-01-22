@@ -15,11 +15,15 @@ public:
     void LoadAssets();
     void Update(float dt);
     void Render();
+    void Start();
+
+    std::weak_ptr<GameObject> AddObject(GameObject *go);
+    std::weak_ptr<GameObject> GetObjectPtr(GameObject *go);
 private:
     void Input();
-    void AddObject(GameObject* obj);
     std::vector<std::shared_ptr<GameObject>> objectArray;
     Music *music;
     bool quitRequested;
+    bool started;
 };
 #endif

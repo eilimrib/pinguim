@@ -5,6 +5,7 @@
 
 GameObject::GameObject(){
     isDead = false;
+    started = false;
 }
 
 
@@ -59,4 +60,11 @@ Component* GameObject::GetComponent(std::string type){
         }
     }
     return nullptr;
+}
+
+
+void GameObject::Start(){
+    for(int i = 0; i < (int) components.size(); i++){
+        components[i]->Start();
+    }
 }
