@@ -3,7 +3,6 @@
 
 #include "SDL_include.h"
 #include "GameObject.h"
-#include "Face.h"
 #include "Sprite.h"
 #include "State.h"
 #include "TileMap.h"
@@ -92,27 +91,6 @@ void State::Input() {
 		
 		// Se o evento for clique...
 		if(event.type == SDL_MOUSEBUTTONDOWN) {
-
-			// Percorrer de trás pra frente pra sempre clicar no objeto mais de cima
-			for(int i = objectArray.size() - 1; i >= 0; --i) {
-				// Obtem o ponteiro e casta pra Face.
-				std::shared_ptr<GameObject> shared(objectArray[i].get());
-				// Nota: Desencapsular o ponteiro é algo que devemos evitar ao máximo.
-				// O propósito do unique_ptr é manter apenas uma cópia daquele ponteiro,
-				// ao usar get(), violamos esse princípio e estamos menos seguros.
-				// Esse código, assim como a classe Face, é provisório. Futuramente, para
-				// chamar funções de GameObjects, use objectArray[i]->função() direto.
-
-				if(shared->box.Contains((float)mouseX, (float)mouseY) ) {
-					Face* face = (Face*)shared->GetComponent( "Face" );
-					if ( nullptr != face ) {
-						// Aplica dano
-						face->Damage(std::rand() % 10 + 10);
-						// Sai do loop (só queremos acertar um)
-						break;
-					}
-				}
-			}
 		}
 		if( event.type == SDL_KEYDOWN ) {
 			// Se a tecla for ESC, setar a flag de quit

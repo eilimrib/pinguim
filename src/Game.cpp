@@ -47,6 +47,7 @@ Game::Game(){
 
     this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     this->state = new State();
+    this->state->Start();
     this->dt = 0.0;
     this->frameStart = 0;
 }
