@@ -2,7 +2,7 @@
 #define MINION_HEADERS
 
 #include "Component.h"
-
+#include <memory>
 
 class Minion: public Component{
 public:
@@ -15,7 +15,7 @@ public:
     bool Shoot(Vec2 target);
 private:
     float arc;
-    GameObject& alienCenter;
-}
+    std::weak_ptr<GameObject> alienCenter;
+};
 
 #endif

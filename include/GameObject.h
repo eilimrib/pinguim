@@ -22,6 +22,7 @@ public:
     void RemoveComponent(Component* cpt);
     Component* GetComponent(std::string type);
     Rect box;
+    double angleDeg;
 private:
     std::vector <Component *> components;
     bool isDead;

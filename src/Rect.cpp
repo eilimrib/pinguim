@@ -64,6 +64,7 @@ Rect Rect::operator -(const Vec2& v) const{
     return Rect(res_x, res_y, this->w, this->h);
 }
 
+
 bool Rect::Contains(float coord_x, float coord_y){
     if (coord_x <= this->x && coord_y <= this->y){
         return true;
@@ -81,4 +82,13 @@ Vec2 Rect::Center()
 void Rect::SetOrigin(Vec2& origin){
     this->x = origin.x;
     this->y = origin.y;
+}
+
+
+Vec2 Rect::ToVec2() const{;
+    return Vec2(this->x, this->y);
+}
+
+Vec2 Rect::Measures() const{
+    return Vec2(this->w, this->h);
 }

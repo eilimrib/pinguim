@@ -20,19 +20,22 @@ public:
 private:
     class Action{
     public:
-        enum actionType{
+        enum ActionType{
             MOVE,
             SHOOT
         };
-        Action(actionType type, float x, float y);
+        Action(ActionType type, float x, float y);
         Vec2 pos;
+        ActionType type;
     };
 
     Vec2 speed;
     int hp;
+    int minions;
 
     std::queue<Action> taskQueue;
-    std::vector<std::weak_ptr<GameObject>> miniorArray;
+    std::vector<std::weak_ptr<GameObject>> minionArray;
+    int GetClosestMinion(Vec2 actionPos);
 };
 
 #endif

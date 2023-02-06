@@ -10,6 +10,8 @@ public:
     Rect(float x, float y, float w, float h);
     
     Vec2 Center();
+    Vec2 Measures() const;
+    Vec2 ToVec2() const;
     void SetOrigin(Vec2& origin);
     bool Contains(float x, float y);
     Rect operator =(const Rect& r) const;

@@ -34,7 +34,31 @@ Vec2 Vec2::operator *(const float& f) const{
     return Vec2(this->x * f, this->y * f);
 }
 
+Vec2 Vec2::operator /(const float& f) const{
+    return Vec2(this->x / f, this->y / f);
+}
 
 Vec2 Vec2::GetRotated(float angle){    
     return Vec2(this->x * cosf(angle) - this->y * sinf(angle), this->y * cosf(angle) + this->x * sinf(angle));
+}
+
+
+float Vec2::Distance(Vec2 vec1, Vec2 vec2){
+    return Mag(vec1 - vec2);
+}
+
+
+float Vec2::DistanceTo(Vec2 &vector){
+    return Mag(*this - vector);
+}
+
+
+float Vec2::atan() {
+    return atan2(this->y, this->x);
+}
+
+
+float Vec2::Direct(Vec2 &vector) {
+    Vec2 result = (vector - *this);
+    return -atan2(result.y, result.x);
 }

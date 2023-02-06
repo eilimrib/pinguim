@@ -6,6 +6,7 @@
 GameObject::GameObject(){
     isDead = false;
     started = false;
+    this->angleDeg = 0;
 }
 
 
