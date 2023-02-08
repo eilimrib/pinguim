@@ -3,6 +3,9 @@
 
 #include "Sprite.h"
 #include "GameObject.h"
+#include "CameraFollower.h"
+#include "Alien.h"
+#include "Camera.h"
 #include "Music.h"
 #include <memory>
 #include <vector>

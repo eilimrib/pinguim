@@ -35,11 +35,14 @@ void Minion::Render(){
 }
 
 
-bool Minion::Is(std::string type){
-    return (type == "Minion");
+void Minion::Shoot(Vec2 target){
+    GameObject *bulletObject = new GameObject();
+    float angle = (target - associated.box.Center()).Atan2();
+    Bullet *bullet = new Bullet(*bulletObject, angle, 10, 10, 100, "img/minionbullet1.png");
+    bulletObject->AddComponent(bullet);
 }
 
 
-bool Minion::Shoot(Vec2 target){
-    
+bool Minion::Is(std::string type){
+    return (type == "Minion");
 }

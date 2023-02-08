@@ -2,6 +2,7 @@
 #define MINION_HEADERS
 
 #include "Component.h"
+#include "Bullet.h"
 #include <memory>
 
 class Minion: public Component{
@@ -11,8 +12,8 @@ public:
            float arcOffsetDrag = 0);
     void Update(float dt);
     void Render();
+    void Shoot(Vec2 target);
     bool Is(std::string type);
-    bool Shoot(Vec2 target);
 private:
     float arc;
     std::weak_ptr<GameObject> alienCenter;

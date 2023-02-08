@@ -23,23 +23,36 @@ State::~State(){
 
 
 void State::LoadAssets(){
-	GameObject *goOcean = new GameObject();
+	GameObject *gameObjectOcean = new GameObject();
 
-	Sprite *bg = new Sprite(*goOcean, "assets/img/ocean.jpg");
-	goOcean->AddComponent(bg);
-	objectArray.emplace_back(goOcean);
+    Sprite *bg = new Sprite(*gameObjectOcean, "assets/img/ocean.jpg");
+    CameraFollower *OceanFollower = new CameraFollower(*gameObjectOcean);
+    gameObjectOcean->AddComponent(bg);
+    gameObjectOcean->AddComponent(OceanFollower);
 
- 	GameObject *gameObjectMap = new GameObject();
+    objectArray.emplace_back(gameObjectOcean);
+
+    GameObject *gameObjectMap = new GameObject();
 
     TileSet *tileSet = new TileSet(64, 64, "assets/img/tileset.png");
     TileMap *tileMap = new TileMap(*gameObjectMap, "assets/map/tileMap.txt", tileSet);
     gameObjectMap->AddComponent(tileMap);
-    gameObjectMap->box.x = 0;
-    gameObjectMap->box.y = 0;
+    gameObjectMap->box.SetOrigin(Vec2(0, 0));
+
     objectArray.emplace_back(gameObjectMap);
 
-	music = new Music("assets/audio/stageState.ogg");
-	music->Play();
+    GameObject *gameObjectAlien = new GameObject();
+    Alien *alien = new Alien(*gameObjectAlien, 3);
+
+    gameObjectAlien->AddComponent(alien);
+    gameObjectAlien->box.SetOrigin((Vec2(1024, 600) - gameObjectAlien->box.Measures())/2);
+
+    objectArray.emplace_back(gameObjectAlien);
+
+    Camera::Follow(gameObjectAlien);
+
+    music = new Music("assets/audio/stageState.ogg");
+    music->Play();
 }
 
 

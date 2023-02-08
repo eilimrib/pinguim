@@ -11,9 +11,6 @@ Vec2::Vec2(float x, float y){
     this->y = y;
 }
 
-Vec2 Vec2::operator =(const Vec2& v) const{
-    return Vec2(v.x, v.y);
-}
 
 Vec2 Vec2::operator +(const Vec2& v) const{
     return Vec2(this->x + v.x, this->y + v.y);
@@ -53,8 +50,14 @@ float Vec2::DistanceTo(Vec2 &vector){
 }
 
 
-float Vec2::atan() {
+float Vec2::Atan2()
+{
     return atan2(this->y, this->x);
+}
+
+float Vec2::Atan2(Vec2 v1, Vec2 v2)
+{
+    return atan2(v1.y, v1.x) - atan2(v2.y, v2.x);
 }
 
 

@@ -7,12 +7,10 @@
 #include <string>
 #include <SDL_include.h>
 
-namespace engine{
-    static const std::string DEFAULT_GAME_NAME = "Eileen Lima Ribeiro 16/0049458";
-    static const int DEFAULT_HEIGHT(600);
-    static const int DEFAULT_WIDTH(1024);
-    static const int INT_MAX(2);
-}
+#define DEFAULT_HEIGHT 600
+#define DEFAULT_WIDTH 1024
+#define DEFAULT_GAME_NAME "Eileen Lima Ribeiro 16/0049458"
+
 
 class Game{
 public:

@@ -79,7 +79,7 @@ Vec2 Rect::Center()
 }
 
 
-void Rect::SetOrigin(Vec2& origin){
+void Rect::SetOrigin(Vec2 origin){
     this->x = origin.x;
     this->y = origin.y;
 }

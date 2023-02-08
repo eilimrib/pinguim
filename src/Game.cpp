@@ -6,7 +6,6 @@
 #include <string>
 #include <SDL_include.h> 
 
-using namespace engine;
 
 Game* Game::instance = nullptr;
 
@@ -36,9 +35,9 @@ Game::Game(){
     }
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
     Mix_AllocateChannels(32);
-    this->width = engine::DEFAULT_WIDTH;
-    this->height = engine::DEFAULT_HEIGHT;
-    this->window = SDL_CreateWindow(engine::DEFAULT_GAME_NAME.c_str(), 
+    this->width = DEFAULT_WIDTH;
+    this->height = DEFAULT_HEIGHT;
+    this->window = SDL_CreateWindow(DEFAULT_GAME_NAME, 
                               SDL_WINDOWPOS_CENTERED, 
                               SDL_WINDOWPOS_CENTERED, 
                               this->width, 
