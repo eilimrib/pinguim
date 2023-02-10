@@ -59,11 +59,14 @@ void Sprite::Render(int x, int y, int w, int h)
     dst.w = w;
     dst.h = h;
 
-    if (SDL_RenderCopy(
+    if (SDL_RenderCopyEx(
             Game::GetInstance().GetRenderer(), // renderer
             texture.get(),                            // texture
             &clipRect,                          // source rect
-            &dst                                // destination rect
+            &dst,                                // destination rect
+            associated.angleDeg,
+            nullptr,
+            SDL_FLIP_NONE
             ))
     {
         SDL_LogError(0, "Unable to render sprite: %s", IMG_GetError());
@@ -94,7 +97,7 @@ void Sprite::Update(float dt){
 
 
 void Sprite::Render(){
-
+    Render(associated.box.x - Camera::pos.x, associated.box.y - Camera::pos.y, associated.box.w, associated.box.h);
 }
 
 
