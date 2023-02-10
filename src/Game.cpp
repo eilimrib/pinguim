@@ -102,7 +102,7 @@ State& Game::GetState(){
 
 
 SDL_Renderer* Game::GetRenderer(){
-    return renderer;
+    return this->renderer;
 }
 
 

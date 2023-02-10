@@ -22,7 +22,7 @@ void Camera::Unfollow(){
 
 void Camera::Update(float dt){
     if (focus != nullptr){
-        Game game = Game::GetInstance();
+        Game &game = Game::GetInstance();
         pos.x = focus->box.Center().x - (game.width/2);
         pos.y = focus->box.Center().y - (game.height/2);
     }
