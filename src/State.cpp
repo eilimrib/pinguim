@@ -57,11 +57,24 @@ void State::LoadAssets(){
 
 
 void State::Update(float dt){
-    if(SDL_QuitRequested()){
-        quitRequested = true;
-    }
+	Camera::Update(dt);
+
+	if (InputManager::GetInstance().QuitRequested()){
+		quitRequested = true;
+	}
+
+	for (unsigned i = 0; i < objectArray.size(); i++){
+		objectArray[i]->Update(dt);
+	}
 }
 
+
+void State::Render(){
+	for (unsigned i = 0; i < objectArray.size(); i++){
+		objectArray[i]->Render();
+	}
+
+}
 
 bool State::QuitRequested(){
     return quitRequested;

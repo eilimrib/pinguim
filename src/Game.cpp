@@ -109,7 +109,9 @@ SDL_Renderer* Game::GetRenderer(){
 
 void Game::run(){
     while(!state->QuitRequested()){
-        state->Update(0.0);
+        CalculateDeltaTime();
+        state->Update(dt);
+        state->Render();
 
         SDL_RenderPresent(renderer);
         SDL_Delay(33);
