@@ -11,11 +11,13 @@
 
 Sprite::Sprite(GameObject& associated): Component(associated){
     texture = nullptr;
+    this->scale = Vec2(1, 1);
 }
 
 
 Sprite::Sprite(GameObject& associated, std::string file): Component(associated){
     texture = nullptr;
+    this->scale = Vec2(1, 1);
     Open(file.c_str());
 }
 
@@ -56,8 +58,8 @@ void Sprite::Render(int x, int y, int w, int h)
     SDL_Rect dst;
     dst.x = x;
     dst.y = y;
-    dst.w = w;
-    dst.h = h;
+    dst.w = w * scale.x;
+    dst.h = h * scale.y;
 
     if (SDL_RenderCopyEx(
             Game::GetInstance().GetRenderer(), // renderer
@@ -103,4 +105,22 @@ void Sprite::Render(){
 
 bool Sprite::Is(std::string type){
     return (type == "Sprite");
+}
+
+
+void Sprite::SetScale(float scaleX, float scaleY){
+    float newWidth = associated.box.w * (scaleX - scale.x);
+    float newHeight = associated.box.h * (scaleY - scale.y);
+
+    associated.box.w *= (1 + (scaleX - scale.x));
+    associated.box.h *= (1 + (scaleY - scale.y));
+    associated.box.x -= newWidth / 2;
+    associated.box.y -= newHeight / 2;
+
+    this->scale = Vec2(scaleX, scaleY);
+}
+
+
+Vec2 Sprite::GetScale(){
+    return this->scale;
 }

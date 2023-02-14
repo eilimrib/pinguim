@@ -18,6 +18,7 @@ public:
 
     void Open(std::string file);
     void SetClip(int x, int y, int w, int h);
+    void SetScale(float scaleX, float scaleY);
     void Render();
     void Render(int x, int y, int w, int h);
     int GetWidth();
@@ -25,10 +26,13 @@ public:
     bool IsOpen();
     void Update(float dt);
     bool Is(std::string type);
+
+    Vec2 GetScale();
 private:
     std::shared_ptr<SDL_Texture> texture;
     int width;
     int height;
     SDL_Rect clipRect;
+    Vec2 scale;
 };
 #endif
